@@ -1,18 +1,36 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { UserEntity } from "src/user/models/user.entity";
 
-@Entity('review')
-export class ReviewEntity{
-    @PrimaryGeneratedColumn()
-    id: number;
+@Entity("review")
+export class ReviewEntity {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column()
-    m_id: number;
+  @CreateDateColumn()
+  created_at: Date;
 
-    @Column({ default: null })
-    rev_file_path?: string;
+  @UpdateDateColumn()
+  updated_at: Date;
 
-    @ManyToOne(() => UserEntity, (user) => user.reviews)
-    @JoinColumn([{ name: "user_id", referencedColumnName: "id" }])
-    user_id: UserEntity;
+  @DeleteDateColumn()
+  deleted_at: Date;
+
+  @Column()
+  movie_id: number;
+
+  @Column({ default: null })
+  review_file_path?: string;
+
+  @ManyToOne(() => UserEntity, (user) => user.reviews)
+  @JoinColumn([{ name: "user_id", referencedColumnName: "id" }])
+  user: UserEntity;
 }

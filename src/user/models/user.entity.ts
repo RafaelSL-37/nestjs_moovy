@@ -1,34 +1,46 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { ReviewEntity } from "src/review/models/review.entity";
-import { ReviewModel } from "src/review/models/review.interface";
+import { ReviewDTO } from "src/review/models/review.dto";
 
-@Entity('user')
-export class UserEntity{
-    @PrimaryGeneratedColumn()
-    id: number;
+@Entity("user")
+export class UserEntity {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column()
-    email: string;
+  @CreateDateColumn()
+  created_at: Date;
 
-    @Column()
-    password: string;
+  @UpdateDateColumn()
+  updated_at: Date;
 
-    @Column()
-    name: string;
+  @DeleteDateColumn()
+  deleted_at: Date;
 
-    @Column()
-    date_of_birth: Date;
+  @Column()
+  email: string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    account_creation_date: Date;
+  @Column()
+  password: string;
 
-    @Column()
-    gender: string;
+  @Column()
+  name: string;
 
-    @Column({ default: () => 'asdnflasndf' }) //hashing?
-    auth_token: string;
+  @Column()
+  date_of_birth: Date;
 
-    @OneToMany(type => ReviewEntity, (review) => review.user_id)
-    @JoinColumn([{ name: "reviews_id", referencedColumnName: "user_id" }])
-    reviews: ReviewModel[];
+  @Column()
+  gender: string;
+
+  @OneToMany((type) => ReviewEntity, (review) => review.user_id)
+  @JoinColumn([{ name: "reviews_id", referencedColumnName: "user_id" }])
+  reviews: ReviewDTO[];
 }
