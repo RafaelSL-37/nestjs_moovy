@@ -19,6 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "DOTENV_CONFIG_PATH=.env ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js --config src/database/typeorm.config.ts",
     "migration": "npm run typeorm migration:run",
     "migration:show": "npm run typeorm migration:show",
     "migration:create": "npm run typeorm migration:create -- -n",
@@ -63,7 +64,7 @@
     "supertest": "^6.1.3",
     "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
-    "ts-node": "^10.0.0",
+    "ts-node": "^10.9.1",
     "tsconfig-paths": "^3.10.1",
     "typescript": "^4.3.5"
   },

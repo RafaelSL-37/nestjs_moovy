@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeleteResult, Repository } from "typeorm";
-import { ReviewEntity } from "../models/review.entity";
-import { ReviewDTO } from "../models/review.dto";
+import { ReviewEntity } from "./models/review.entity";
+import { ReviewDTO } from "./models/review.dto";
 
 @Injectable()
 export class ReviewService {
@@ -23,8 +23,17 @@ export class ReviewService {
     return this.reviewRepository.findOne(id);
   }
 
-  updateReview(review: ReviewDTO): Promise<ReviewDTO> {
-    return this.reviewRepository.save(review);
+  async updateReview(
+    id: number,
+    reviewToUpdate: ReviewDTO
+  ): Promise<ReviewDTO> {
+    const review = this.findReviewById(id);
+
+    if (review) {
+      throw new BadRequestException("Review not found for update.");
+    }
+
+    return this.reviewRepository.save(reviewToUpdate);
   }
 
   deleteReview(id: number): Promise<DeleteResult> {
