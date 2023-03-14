@@ -11,7 +11,6 @@ export class UserMapper {
       email: entity.email,
       name: entity.name,
       date_of_birth: entity.date_of_birth,
-      gender: entity.gender,
       reviews: entity.reviews,
       password: entity.password,
     };
