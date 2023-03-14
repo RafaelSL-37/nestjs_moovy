@@ -9,14 +9,13 @@ let typeOrmConfig: TypeOrmModuleOptions = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DATABASE,
   autoLoadEntities: true,
-  synchronize: true,
+  synchronize: false,
   entities: [`${__dirname}/../modules/**/models/*.entity.{js,ts}`],
   migrations: [`${__dirname}/../database/migrations/*{.ts,.js}`],
   keepConnectionAlive: true,
   migrationsRun: true,
   migrationsTableName: "migrations_typeorm",
-  name: "default",
   //namingStrategy: new SnakeNamingStrategy(),
 };
 
-export = typeOrmConfig;
+module.exports = typeOrmConfig;

@@ -7,4 +7,4 @@ import { UserModule } from "src/modules/user/user.module";
   controllers: [],
   exports: [],
 })
-export class ReviewModule {}
+export class AuthModule {}

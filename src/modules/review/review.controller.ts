@@ -7,8 +7,7 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { Observable } from "rxjs";
-import { DeleteResult, UpdateResult } from "typeorm";
+import { DeleteResult } from "typeorm";
 import { ReviewDTO } from "./models/review.dto";
 import { ReviewService } from "./review.service";
 

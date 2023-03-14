@@ -12,26 +12,20 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const review_module_1 = require("./review/review.module");
-const user_module_1 = require("./user/user.module");
+const typeOrmConfig = require("./database/typeorm.config");
+const auth_module_1 = require("./modules/auth/auth.module");
+const review_module_1 = require("./modules/review/review.module");
+const user_module_1 = require("./modules/user/user.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: 'localhost',
-                port: 5432,
-                username: 'postgres',
-                password: '123456',
-                database: 'dbmoovy3',
-                autoLoadEntities: true,
-                synchronize: true
-            }),
+            typeorm_1.TypeOrmModule.forRoot(typeOrmConfig),
             review_module_1.ReviewModule,
-            user_module_1.UserModule
+            user_module_1.UserModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

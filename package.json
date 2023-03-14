@@ -22,8 +22,8 @@
     "typeorm": "DOTENV_CONFIG_PATH=.env ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js --config src/database/typeorm.config.ts",
     "migration": "npm run typeorm migration:run",
     "migration:show": "npm run typeorm migration:show",
-    "migration:create": "npm run typeorm migration:create -- -n",
-    "migration:generate": "npm run typeorm migration:generate -- --pretty -n",
+    "migration:create": "npm run typeorm migration:create -- -d ./src/database/migrations -n",
+    "migration:generate": "npm run typeorm migration:generate -- --pretty -d ./src/database/migrations -n",
     "migration:revert": "npm run typeorm migration:revert"
   },
   "dependencies": {
@@ -40,7 +40,6 @@
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0",
     "typeorm": "^0.2.45"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { UserService } from "src/modules/user/user.service";
-import { UserCredentialsDTO } from "../models/user-credentials.dto";
+import { UserCredentialsDTO } from "./models/user-credentials.dto";
 import * as jsonwebtoken from "jsonwebtoken";
 import { AuthUserDTO } from "src/modules/user/models/user.dto";
 import * as bcrypt from "bcrypt";

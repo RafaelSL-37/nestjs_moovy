@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
-import { UserEntity } from "src/user/models/user.entity";
+import { UserEntity } from "src/modules/user/models/user.entity";
 import { BaseEntity } from "src/core/base.entity";
 
 @Entity("review")

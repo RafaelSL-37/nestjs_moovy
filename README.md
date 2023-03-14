@@ -71,3 +71,40 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Tutorial de criação do container
+
+-sudo service docker status
+
+(caso não esteja rodando)
+-sudo service docker start
+
+(download da imagem mais recente do postgres)
+-sudo docker pull postgres
+
+(pra mapear os dados do banco na maquina e não perder quando o container for fechado)
+sudo docker run --name <CONTAINER_NAME> --restart always -v $HOME/banco-postgres:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_PASSWORD=<PASSWORD> -d postgres
+PORT_MACHINE:PORT_CONTAINER IMAGE_NAME
+(pra ver a lista dos container rodando, pra ver todos adiciona "-a")
+sudo docker ps
+
+(pra acessar o psql)
+psql -h localhost -p 5454 -U postgres -W
+
+(quando acessar o psql, pode fazer as alterações com o postgres à vontade)
+CREATE DATABASE <database>;
+
+pra deletar container:
+sudo docker rm <ID OU NOME>
+
+pra parar container:
+sudo docker kill <ID OU NOME>
+
+Os dados a serem utilizados pra conexão são os seguintes:
+{
+HOST: 'localhost'
+DATABASE: <database>
+PASSWORD: <password>
+USERNAME: <user>
+PORT: PORT_MACHINE
+}

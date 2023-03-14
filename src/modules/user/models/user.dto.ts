@@ -1,4 +1,4 @@
-import { ReviewDTO } from "src/review/models/review.dto";
+import { ReviewDTO } from "src/modules/review/models/review.dto";
 
 export interface UserDTO {
   id: string;
@@ -16,8 +16,6 @@ export interface UserDTO {
   name: string;
 
   date_of_birth: Date;
-
-  gender: string;
 
   reviews: ReviewDTO[];
 }

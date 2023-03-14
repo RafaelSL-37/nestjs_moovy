@@ -1,4 +1,4 @@
-import { UserDTO } from "src/user/models/user.dto";
+import { UserDTO } from "src/modules/user/models/user.dto";
 
 export interface ReviewDTO {
   id: string;
