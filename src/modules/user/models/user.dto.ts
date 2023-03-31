@@ -1,14 +1,7 @@
+import { BaseDTO } from "src/core/base.dto";
 import { ReviewDTO } from "src/modules/review/models/review.dto";
 
-export interface UserDTO {
-  id: string;
-
-  created_at: Date;
-
-  updated_at: Date;
-
-  deleted_at: Date;
-
+export interface UserDTO extends BaseDTO {
   email: string;
 
   password: string;

@@ -11,6 +11,7 @@ import { DeleteResult } from "typeorm";
 import { ReviewDTO } from "./models/review.dto";
 import { ReviewService } from "./review.service";
 
+//TODO: PUT A MAPPER FUNCTION ON EACH OF THE RETURNS
 @Controller("review")
 export class ReviewController {
   constructor(private reviewService: ReviewService) {}

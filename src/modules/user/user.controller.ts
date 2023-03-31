@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -35,15 +34,9 @@ export class UserController {
   @Put(":id")
   async update(
     @Param("id") id: string,
-    @Body() userToUpdate: UserDTO
+    @Body() userUpdate: UserDTO
   ): Promise<UserEntity> {
-    const user = await this.userService.findUserById(id);
-
-    if (user) {
-      return this.userService.updateUser(userToUpdate);
-    }
-
-    throw new NotFoundException("User not found.");
+    return this.userService.updateUser(id, userUpdate);
   }
 
   @Delete(":id")

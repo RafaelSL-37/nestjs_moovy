@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "./models/user.entity";
 import { ShortUserDTO, UserDTO } from "./models/user.dto";
@@ -12,8 +16,8 @@ export class UserService {
     private readonly userRepository: UserRepository
   ) {}
 
-  createUser(user: UserDTO): Promise<UserEntity> {
-    const alreadyRegisteredUser = this.findUserByEmail(user.email);
+  async createUser(user: UserDTO): Promise<UserEntity> {
+    const alreadyRegisteredUser = await this.findUserByEmail(user.email);
 
     if (alreadyRegisteredUser)
       throw new BadRequestException(
@@ -36,17 +40,23 @@ export class UserService {
     return this.userRepository.findOne(id, { relations: ["reviews"] });
   }
 
-  updateUser(user: UserDTO): Promise<UserEntity> {
-    return this.userRepository.save(user);
+  async updateUser(id: string, userUpdate: UserDTO): Promise<UserEntity> {
+    const user = await this.findUserById(id);
+
+    if (user) {
+      Object.assign(user, userUpdate);
+
+      return this.userRepository.save(user);
+    }
+
+    throw new NotFoundException("User not found.");
   }
 
   deleteUser(id: number): any {
     return this.userRepository.delete(id);
   }
 
-  async findUserByEmail(email: string): Promise<ShortUserDTO> {
-    const user = await this.userRepository.findOne(email);
-
-    return UserMapper.fromEntityToShortUserDTO(user);
+  findUserByEmail(email: string): Promise<ShortUserDTO> {
+    return this.userRepository.findOne({ email });
   }
 }
