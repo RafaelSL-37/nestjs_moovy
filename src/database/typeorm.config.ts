@@ -1,6 +1,9 @@
 //import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
+import * as dotenv from "dotenv";
+dotenv.config({ path: ".env.dev" });
+
 let typeOrmConfig: TypeOrmModuleOptions = {
   type: "postgres",
   host: process.env.POSTGRES_HOST,

@@ -3,7 +3,7 @@ import { AppModule } from "./app.module";
 import * as dotenv from "dotenv";
 import { ReviewService } from "./modules/review/review.service";
 
-dotenv.config();
+dotenv.config({ path: ".env.dev" });
 
 async function run(): Promise<void> {
   const app = await NestFactory.create(AppModule);
