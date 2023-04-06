@@ -83,7 +83,7 @@ Nest is [MIT licensed](LICENSE).
 -sudo docker pull postgres
 
 (pra mapear os dados do banco na maquina e não perder quando o container for fechado)
-sudo docker run --name <CONTAINER_NAME> --restart always -v $HOME/banco-postgres:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_PASSWORD=<PASSWORD> -d postgres
+sudo docker run --name <CONTAINER_NAME> --restart always -v $HOME/banco-postgres:/var/lib/postgresql/data -p 5454:5432 -e POSTGRES_PASSWORD=<PASSWORD> -d postgres
 PORT_MACHINE:PORT_CONTAINER IMAGE_NAME
 (pra ver a lista dos container rodando, pra ver todos adiciona "-a")
 sudo docker ps

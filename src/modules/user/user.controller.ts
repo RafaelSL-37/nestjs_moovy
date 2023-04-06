@@ -6,29 +6,36 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from "@nestjs/common";
 import { UserEntity } from "./models/user.entity";
 import { UserDTO } from "./models/user.dto";
 import { UserService } from "./user.service";
+import { UserMapper } from "./mapper/user.mapper";
 
-//TODO: PUT A MAPPER FUNCTION ON EACH OF THE RETURNS
 @Controller("user")
 export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  findAll(): Promise<UserDTO[]> {
-    return this.userService.findAllUsers();
+  async findAll(): Promise<UserDTO[]> {
+    const users = await this.userService.findAllUsers();
+
+    return users.map(UserMapper.fromEntityToDTO);
   }
 
   @Get(":id")
-  findById(@Param() id: string): Promise<UserDTO> {
-    return this.userService.findUserById(id);
+  async findById(@Param() id: string): Promise<UserDTO> {
+    const user = await this.userService.findUserById(id);
+
+    return UserMapper.fromEntityToDTO(user);
   }
 
   @Post()
-  create(@Body() user: UserDTO): Promise<UserDTO> {
-    return this.userService.createUser(user);
+  async create(@Body() user: UserDTO): Promise<UserDTO> {
+    const createdUser = await this.userService.createUser(user);
+
+    return UserMapper.fromEntityToDTO(createdUser);
   }
 
   @Put(":id")
@@ -36,7 +43,9 @@ export class UserController {
     @Param("id") id: string,
     @Body() userUpdate: UserDTO
   ): Promise<UserEntity> {
-    return this.userService.updateUser(id, userUpdate);
+    const updatedUser = await this.userService.updateUser(id, userUpdate);
+
+    return UserMapper.fromEntityToDTO(updatedUser);
   }
 
   @Delete(":id")
