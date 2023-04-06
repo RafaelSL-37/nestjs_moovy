@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
   UseGuards,
@@ -25,7 +26,7 @@ export class UserController {
   }
 
   @Get(":id")
-  async findById(@Param() id: string): Promise<UserDTO> {
+  async findById(@Param("id", ParseUUIDPipe) id: string): Promise<UserDTO> {
     const user = await this.userService.findUserById(id);
 
     return UserMapper.fromEntityToDTO(user);
@@ -40,7 +41,7 @@ export class UserController {
 
   @Put(":id")
   async update(
-    @Param("id") id: string,
+    @Param("id", ParseUUIDPipe) id: string,
     @Body() userUpdate: UserDTO
   ): Promise<UserEntity> {
     const updatedUser = await this.userService.updateUser(id, userUpdate);
@@ -49,7 +50,7 @@ export class UserController {
   }
 
   @Delete(":id")
-  delete(@Param("id") id: number): void {
+  delete(@Param("id", ParseUUIDPipe) id: number): void {
     return this.userService.deleteUser(id);
   }
 }

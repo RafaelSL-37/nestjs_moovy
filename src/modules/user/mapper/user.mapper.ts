@@ -1,7 +1,24 @@
 import { UserEntity } from "../models/user.entity";
 import { AuthUserDTO, ShortUserDTO, UserDTO } from "../models/user.dto";
+import { BadRequestException } from "@nestjs/common";
 
 export class UserMapper {
+  static fromDTOtoEntity(dto: UserDTO): UserEntity {
+    if (!dto) {
+      throw new BadRequestException("Invalid input DTO");
+    }
+
+    const entity = new UserEntity();
+
+    const fields = Object.getOwnPropertyNames(dto);
+
+    fields.forEach((field) => {
+      entity[field] = dto[field];
+    });
+
+    return entity;
+  }
+
   static fromEntityToDTO(entity: UserEntity): UserDTO {
     const userDTO: UserDTO = {
       id: entity.id,
@@ -12,10 +29,8 @@ export class UserMapper {
       name: entity.name,
       date_of_birth: entity.date_of_birth,
       reviews: entity.reviews,
-      password: entity.password,
+      password: "[REDACTED]",
     };
-
-    delete userDTO.password;
 
     return userDTO;
   }

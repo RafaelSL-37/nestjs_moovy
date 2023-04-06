@@ -4,43 +4,51 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
 } from "@nestjs/common";
-import { DeleteResult } from "typeorm";
+import { ReviewMapper } from "./mapper/review.mapper";
 import { ReviewDTO } from "./models/review.dto";
 import { ReviewService } from "./review.service";
 
-//TODO: PUT A MAPPER FUNCTION ON EACH OF THE RETURNS
 @Controller("review")
 export class ReviewController {
   constructor(private reviewService: ReviewService) {}
 
   @Get()
-  findAll(): Promise<ReviewDTO[]> {
-    return this.reviewService.findAllReviews();
+  async findAll(): Promise<ReviewDTO[]> {
+    const reviews = await this.reviewService.findAllReviews();
+
+    return reviews.map(ReviewMapper.fromEntityToDTO);
   }
 
   @Get(":id")
-  findById(@Param("id") id: number): Promise<ReviewDTO> {
-    return this.reviewService.findReviewById(id);
+  async findById(@Param("id", ParseUUIDPipe) id: number): Promise<ReviewDTO> {
+    const review = await this.reviewService.findReviewById(id);
+
+    return ReviewMapper.fromEntityToDTO(review);
   }
 
   @Post()
-  create(@Body() review: ReviewDTO): Promise<ReviewDTO> {
-    return this.reviewService.createReview(review);
+  async create(@Body() review: ReviewDTO): Promise<ReviewDTO> {
+    const createdReview = await this.reviewService.createReview(review);
+
+    return ReviewMapper.fromEntityToDTO(createdReview);
   }
 
   @Put(":id")
-  update(
-    @Param("id") id: number,
+  async update(
+    @Param("id", ParseUUIDPipe) id: number,
     @Body() review: ReviewDTO
   ): Promise<ReviewDTO> {
-    return this.reviewService.updateReview(id, review);
+    const updatedReview = await this.reviewService.updateReview(id, review);
+
+    return ReviewMapper.fromEntityToDTO(updatedReview);
   }
 
   @Delete(":id")
-  delete(@Param("id") id: number): Promise<DeleteResult> {
-    return this.reviewService.deleteReview(id);
+  delete(@Param("id") id: number): void {
+    this.reviewService.deleteReview(id);
   }
 }
