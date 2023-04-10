@@ -12,6 +12,7 @@ export class ReviewMapper {
       movie_id: entity.movie_id,
       review_file_path: entity.review_file_path,
       user_id: entity.user_id,
+      score: entity.score,
       user: entity.user,
     };
 

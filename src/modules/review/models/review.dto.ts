@@ -8,5 +8,7 @@ export interface ReviewDTO extends BaseDTO {
 
   user_id: string;
 
+  score: number;
+
   user?: UserDTO;
 }

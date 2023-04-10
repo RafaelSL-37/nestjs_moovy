@@ -24,6 +24,7 @@ export class CreatingDatabase1678741900376 implements MigrationInterface {
                 "updated_at" TIMESTAMP NOT NULL DEFAULT now(),
                 "deleted_at" TIMESTAMP,
                 "movie_id" character varying NOT NULL,
+                "score" numeric NOT NULL,
                 "review_file_path" character varying,
                 "user_id" uuid NOT NULL,
                 CONSTRAINT "PK_reviews_id" PRIMARY KEY ("id")

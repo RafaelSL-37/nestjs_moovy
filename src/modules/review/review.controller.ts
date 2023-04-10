@@ -12,6 +12,7 @@ import { ReviewMapper } from "./mapper/review.mapper";
 import { ReviewDTO } from "./models/review.dto";
 import { ReviewService } from "./review.service";
 
+//TODO: API TAGS FOR POSSIBLE RESULTS => SWAGGER
 @Controller("review")
 export class ReviewController {
   constructor(private reviewService: ReviewService) {}

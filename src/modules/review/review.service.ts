@@ -12,6 +12,8 @@ export class ReviewService {
   ) {}
 
   createReview(review: ReviewDTO): Promise<ReviewEntity> {
+    //TODO: TEST IF SCORE IS VALIDE (BETWEEN 0 AND 5)
+
     return this.reviewRepository.save(review);
   }
 
@@ -37,6 +39,8 @@ export class ReviewService {
     if (review) {
       throw new BadRequestException("Review not found for update.");
     }
+
+    //TODO: TEST IF SCORE IS VALIDE (BETWEEN 0 AND 5)
 
     return this.reviewRepository.save(reviewToUpdate);
   }
