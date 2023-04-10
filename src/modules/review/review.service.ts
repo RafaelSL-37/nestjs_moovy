@@ -15,18 +15,23 @@ export class ReviewService {
     return this.reviewRepository.save(review);
   }
 
-  findAllReviews(): Promise<ReviewDTO[]> {
+  findAllReviews(): Promise<ReviewEntity[]> {
     return this.reviewRepository.find();
   }
 
-  findReviewById(id: number): Promise<ReviewDTO> {
+  //TODO: INSERT PAGINATION
+  findReviewsByUserIdPaginated(userId: string): Promise<ReviewEntity[]> {
+    return this.reviewRepository.find({ user_id: userId });
+  }
+
+  findReviewById(id: number): Promise<ReviewEntity> {
     return this.reviewRepository.findOne(id);
   }
 
   async updateReview(
     id: number,
     reviewToUpdate: ReviewDTO
-  ): Promise<ReviewDTO> {
+  ): Promise<ReviewEntity> {
     const review = this.findReviewById(id);
 
     if (review) {

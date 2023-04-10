@@ -18,7 +18,7 @@ let typeOrmConfig: TypeOrmModuleOptions = {
   keepConnectionAlive: true,
   migrationsRun: true,
   migrationsTableName: "migrations_typeorm",
-  //namingStrategy: new SnakeNamingStrategy(),
+  //namingStrategy: new SnakeNamingStrategy(), //TODO: IMPLEMENT CAMEL CASE NAMING STRATEGY
 };
 
 module.exports = typeOrmConfig;

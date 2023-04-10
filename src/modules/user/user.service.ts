@@ -31,7 +31,7 @@ export class UserService {
     return this.userRepository.find({ relations: ["reviews"] });
   }
 
-  //TODO: fix pagination
+  //TODO: IMPLEMENT PAGINATION
   findAllUsersPaginated(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }

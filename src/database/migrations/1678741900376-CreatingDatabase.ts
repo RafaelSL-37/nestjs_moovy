@@ -5,7 +5,7 @@ export class CreatingDatabase1678741900376 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-            CREATE TABLE "user" (
+            CREATE TABLE "users" (
                 "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
                 "created_at" TIMESTAMP NOT NULL DEFAULT now(),
                 "updated_at" TIMESTAMP NOT NULL DEFAULT now(),
@@ -14,36 +14,36 @@ export class CreatingDatabase1678741900376 implements MigrationInterface {
                 "password" character varying NOT NULL,
                 "name" character varying NOT NULL,
                 "date_of_birth" TIMESTAMP NOT NULL,
-                CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id")
+                CONSTRAINT "PK_users_id" PRIMARY KEY ("id")
             )
         `);
     await queryRunner.query(`
-            CREATE TABLE "review" (
+            CREATE TABLE "reviews" (
                 "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
                 "created_at" TIMESTAMP NOT NULL DEFAULT now(),
                 "updated_at" TIMESTAMP NOT NULL DEFAULT now(),
                 "deleted_at" TIMESTAMP,
-                "movie_id" integer NOT NULL,
+                "movie_id" character varying NOT NULL,
                 "review_file_path" character varying,
-                "user_id" uuid,
-                CONSTRAINT "PK_2e4299a343a81574217255c00ca" PRIMARY KEY ("id")
+                "user_id" uuid NOT NULL,
+                CONSTRAINT "PK_reviews_id" PRIMARY KEY ("id")
             )
         `);
     await queryRunner.query(`
-            ALTER TABLE "review"
-            ADD CONSTRAINT "FK_81446f2ee100305f42645d4d6c2" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+            ALTER TABLE "reviews"
+            ADD CONSTRAINT "FK_reviews_user_id_references_users_id" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
         `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-            ALTER TABLE "review" DROP CONSTRAINT "FK_81446f2ee100305f42645d4d6c2"
+            ALTER TABLE "reviews" DROP CONSTRAINT "FK_reviews_user_id_references_users_id"
         `);
     await queryRunner.query(`
-            DROP TABLE "review"
+            DROP TABLE "reviews"
         `);
     await queryRunner.query(`
-            DROP TABLE "user"
+            DROP TABLE "users"
         `);
   }
 }

@@ -23,6 +23,13 @@ export class ReviewController {
     return reviews.map(ReviewMapper.fromEntityToDTO);
   }
 
+  @Get("user/:id")
+  async findAllByUserIdPaginated(): Promise<ReviewDTO[]> {
+    const reviews = [];
+
+    return reviews.map(ReviewMapper.fromEntityToDTO);
+  }
+
   @Get(":id")
   async findById(@Param("id", ParseUUIDPipe) id: number): Promise<ReviewDTO> {
     const review = await this.reviewService.findReviewById(id);

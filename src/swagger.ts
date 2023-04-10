@@ -1,5 +1,7 @@
 // import { Logger, INestApplication } from "@nestjs/common";
 
+//TODO: IMPLEMENT SWAGGER
+
 // export function setupSwagger(
 //   app: INestApplication,
 //   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -11,6 +11,7 @@ export class ReviewMapper {
       deleted_at: entity.deleted_at,
       movie_id: entity.movie_id,
       review_file_path: entity.review_file_path,
+      user_id: entity.user_id,
       user: entity.user,
     };
 

@@ -3,7 +3,7 @@ import { ReviewEntity } from "src/modules/review/models/review.entity";
 import { ReviewDTO } from "src/modules/review/models/review.dto";
 import { BaseEntity } from "src/core/base.entity";
 
-@Entity("user")
+@Entity("users")
 export class UserEntity extends BaseEntity {
   @Column()
   email: string;
