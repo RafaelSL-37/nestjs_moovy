@@ -32,6 +32,7 @@ export class UserController {
     return UserMapper.fromEntityToDTO(user);
   }
 
+  //TODO: VALIDATION FOR SAME EMAIL
   @Post()
   async create(@Body() user: UserDTO): Promise<UserDTO> {
     const createdUser = await this.userService.createUser(user);

@@ -15,7 +15,7 @@ export class AuthService {
     const user = await this.validateUser(userCredentials);
 
     if (user) {
-      return jsonwebtoken.sign(user, process.env.JWT_SECRET_WORD, {
+      return jsonwebtoken.sign({ user }, process.env.JWT_SECRET_WORD, {
         expiresIn: "7d",
       });
     }
@@ -26,7 +26,7 @@ export class AuthService {
   async validateUser(
     userCredentials: UserCredentialsDTO
   ): Promise<AuthUserDTO> {
-    const user = await this.userService.findUserByEmail(userCredentials.login);
+    const user = await this.userService.findUserByEmail(userCredentials.email);
 
     if (
       user &&

@@ -16,7 +16,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Public()
-  @Post("/login")
+  @Post("login")
   async authUser(@Body() userCredentials: UserCredentialsDTO): Promise<string> {
     return this.authService.authenticateUserByCredentials(userCredentials);
   }

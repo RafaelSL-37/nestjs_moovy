@@ -1,5 +1,5 @@
 export class UserCredentialsDTO {
-  login: string;
+  email: string;
 
   password: string;
 }
