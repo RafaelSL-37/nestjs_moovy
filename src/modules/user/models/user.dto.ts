@@ -29,7 +29,7 @@ export interface ShortUserDTO {
   date_of_birth: Date;
 }
 
-export interface AuthUserDTO {
+export interface AuthUserBO {
   id: string;
 
   name: string;

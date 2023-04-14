@@ -1,5 +1,5 @@
 import { UserEntity } from "../models/user.entity";
-import { AuthUserDTO, ShortUserDTO, UserDTO } from "../models/user.dto";
+import { AuthUserBO, ShortUserDTO, UserDTO } from "../models/user.dto";
 import { BadRequestException } from "@nestjs/common";
 
 export class UserMapper {
@@ -49,12 +49,12 @@ export class UserMapper {
     return shortUserDto;
   }
 
-  static fromShortUserToAuthUser(shortUser: UserDTO): AuthUserDTO {
-    const authUserDto: AuthUserDTO = {
+  static fromShortUserToAuthUser(shortUser: UserDTO): AuthUserBO {
+    const authUserBO: AuthUserBO = {
       id: shortUser.id,
       name: shortUser.name,
     };
 
-    return authUserDto;
+    return authUserBO;
   }
 }

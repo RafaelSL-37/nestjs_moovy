@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { UserService } from "src/modules/user/user.service";
 import { UserCredentialsDTO } from "./models/user-credentials.dto";
 import * as jsonwebtoken from "jsonwebtoken";
-import { AuthUserDTO } from "src/modules/user/models/user.dto";
+import { AuthUserBO } from "src/modules/user/models/user.dto";
 import * as bcrypt from "bcrypt";
 
 @Injectable()
@@ -23,9 +23,7 @@ export class AuthService {
     throw new NotFoundException("User not found.");
   }
 
-  async validateUser(
-    userCredentials: UserCredentialsDTO
-  ): Promise<AuthUserDTO> {
+  async validateUser(userCredentials: UserCredentialsDTO): Promise<AuthUserBO> {
     const user = await this.userService.findUserByEmail(userCredentials.email);
 
     if (
