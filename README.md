@@ -74,6 +74,8 @@ Nest is [MIT licensed](LICENSE).
 
 ## Tutorial de criação do container
 
+TODO: PUT ALL OF THESE INTO THE DOCKER-COMPOSE FILE
+
 -sudo service docker status
 
 (caso não esteja rodando)
